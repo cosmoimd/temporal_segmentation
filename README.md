@@ -1,7 +1,7 @@
 # Temporal Segmentation of Full-Procedure Colonoscopy Videos
 
 ## Overview
-This repository accompanies the paper **"ColonTCN: Temporal Segmentation of Colonoscopy Videos"**. It provides the implementation of ColonTCN, a Temporal Convolutional Network-based approach for segmenting colonoscopy videos into anatomical sections and procedural phases. The project leverages a benchmark dataset derived from the annotated REAL-Colon dataset, which features 2.7 million frames across 60 full-procedure videos.
+This repository accompanies the paper **"A Temporal Convolutional Network-Based Approach and a Benchmark Dataset for Colonoscopy Video Temporal Segmentation"**. It provides the implementation of ColonTCN, a Temporal Convolutional Network-based approach for segmenting colonoscopy videos into anatomical sections and procedural phases. The project leverages a benchmark dataset derived from the annotated REAL-Colon dataset, which features 2.7 million frames across 60 full-procedure videos, and proposed two k-fold validation splits and metrics to evauate model performance.
 
 ![Detailed Temporal Segmentation Visualization](./data/images/visualisation.png)
 
