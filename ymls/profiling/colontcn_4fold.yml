@@ -1,0 +1,31 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Profile a ColonTCN model
+##### ##### ##### #####
+##### ##### ##### ##### 
+
+general:
+  # Root directory where to save the inference results
+  output_folder: ""
+
+model:
+  # add a path if you wish to finetune the model
+  model_path: ""
+
+  # Model Architecture
+  model_type: "tcn" # mstcn or tcn
+
+  ### Model Architecture
+  conv_type: "causal" # type of TCN: "acausal" (see past and future) or "casual" (see only the past)
+  input_size: 2048 # input embedding dimension
+  list_of_features_sizes: [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64] # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  conv_first: True # to apply FC on the embedding before sending them to the TCN
+  sigmoid_output: False # to apply sigmoid NN on the output, this is suboptmibal but we did this in the past
+  dropout_before_last: False # whether to apply or not dropout before the last layer
+  conv_before_last: False # whether to apply an additional 1D convolution before the last layer
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  output_size: 2   # number of output classes of the model

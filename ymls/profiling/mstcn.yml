@@ -1,0 +1,41 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Profile a ColonTCN model
+##### ##### ##### #####
+##### ##### ##### ##### 
+
+general:
+  # Root directory where to save the inference results
+  output_folder: ""
+
+model:
+  # Path to the model
+  model_path: ""
+
+  ### Model Architecture
+  # Model Type
+  model_type: "mstcn"
+
+  # Model configuration
+  input_size: 2048 # input embedding dimension
+  conv_type: "casual"
+  conv_first: False # to apply FC on the embedding before sending them to the TCN
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  list_of_features_sizes: [128, 98, 64, 48]  # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  conv_before_last: False # whether to apply an additional 1D convolution before the last layer
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  dropout_before_last: False # whether to apply or not dropout before the last layer
+  sigmoid_output: True # to apply sigmoid NN on the output, this is suboptmibal but we did this in the past
+  output_size: 4   # number of output classes of the model
+
+  # Multiple stages configuration
+  mstcn_num_stages: 1 # number of refinement stages in the model
+  mstcn_input_size: 4 # input embedding dimension, 3 since the output of the base TCN is 3
+  mstcn_list_of_features_sizes: [16, 16, 16, 16] # list of filters at each layer
+  mstcn_kernel_size: 7 # size of the 1D kernel at every layer
+  mstcn_dropout: 0.5 # amount of dropout applied at each layer
+  mstcn_num_of_convs: 1 # number of convolutions at each temporal block
+  mstcn_residual: True # whether to use residual connections in each layer

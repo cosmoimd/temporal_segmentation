@@ -1,0 +1,14 @@
+output_folder: "/ssd/storage/shared/carlo/results/ieee_tmi_paper/dataset_stats"
+
+time_threshold: 120
+
+video_csv_path: ["/ssd/storage/shared/colonscopy/location_recognition/datasets/public_dataset/20230728_filtered/set1_CB-17-08_split_procedures_WL_first_v20230206/intermediate",
+                 "/ssd/storage/shared/colonscopy/location_recognition/datasets/public_dataset/20230728_filtered/set2_change_study/intermediate",
+                 "/ssd/storage/shared/colonscopy/location_recognition/datasets/public_dataset/20230728_filtered/set3_102_maieron_stpolten/intermediate",
+                 "/ssd/storage/shared/colonscopy/location_recognition/datasets/public_dataset/20230728_filtered/set4_sano-hospital/intermediate"]
+
+
+pkl_files: ["/ssd/storage/shared/carlo/results/feature_extraction_public_dataset/set1_1x",
+            "/ssd/storage/shared/carlo/results/feature_extraction_public_dataset/set2_1x",
+            "/ssd/storage/shared/carlo/results/feature_extraction_public_dataset/set3_1x",
+            "/ssd/storage/shared/carlo/results/feature_extraction_public_dataset/set4_1x"]

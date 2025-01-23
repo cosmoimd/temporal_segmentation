@@ -1,0 +1,17 @@
+torch
+torchvision
+numpy
+pyyaml
+pandas
+opencv-python
+scipy
+imageio
+natsort
+rich
+seaborn
+tensorboard
+scikit-learn
+scikit-image
+timm
+tqdm
+tensorboardX
