@@ -1,0 +1,12 @@
+cb_train_1x:
+  # where to save output dataset
+  output_folder: "./data/datasets/RC_dataset_embeddings/"
+  # feature extraction output folder
+  feature_extraction_folder: "./data/datasets/RC_feature_extraction_output/"
+  # number of augmentations run during feature extraction
+  number_of_augmentations: 5
+
+  # folder containing dataset video csvs
+  video_csv_intermediate_path: "./data/dataset/RC_annotations/"
+  # sampling factor which was used at feature extraction. enconding of one frame every?
+  sampling_factor: 5
