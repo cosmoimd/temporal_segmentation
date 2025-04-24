@@ -1,0 +1,153 @@
+##### ##### ##### #####
+##### ##### ##### #####
+#####
+##### ##### ##### #####
+##### ##### ##### #####
+
+general:
+  # root directory where to save the inference results
+  output_folder: "./experiments/outputs/5fold_colontcn_result/"
+
+  # Minimum checkpoint accepted for testing
+  min_check: 5
+
+  # Checkpoints studied
+  checkpoint_start: 0
+  checkpoint_end: 1900
+  checkpoint_step: 100
+
+  folds_values: [ 'f1_fold_1', 'f1_fold_2', 'f1_fold_3', 'f1_fold_4',  'f1_fold_5' ]
+
+data_loader:
+  batch_size: 1 # train and valid batch size
+  num_workers: 1 # number of workers per data loader
+  temp_folder_valid: ["./experiments/outputs/valid_fold1/",
+                     "./experiments/outputs/valid_fold2/",
+                     "./experiments/outputs/valid_fold3/",
+                     "./experiments/outputs/valid_fold4/",
+                     "./experiments/outputs/valid_fold5/"]
+  temp_folder_test:  ["./experiments/outputs/test_fold1/",
+                     "./experiments/outputs/test_fold2/",
+                     "./experiments/outputs/test_fold3/",
+                     "./experiments/outputs/test_fold4/",
+                     "./experiments/outputs/test_fold5/"]
+  prepare_dataset: False # whether to construct the temp dast i/o dataset in the temp_folder from scratch
+
+  rc_csv: "./data/dataset/RC_dataset/video_info.csv"
+
+  "valid": [
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold1_valid.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold1",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold2_valid.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold2",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold3_valid.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold3",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold4_valid.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold4",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold5_valid.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold5",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ]
+  ]
+
+  "test": [
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold1_test.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold1",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold2_test.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold2",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold3_test.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold3",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold4_test.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold4",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+        "video_list": "./data/dataset/RC_lists/5_fold/fold5_test.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5,
+        "dataset_name": "fold5",
+        "gt_name": "GT",
+        "str_to_idx": { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 } }
+    ]
+  ]
+
+model:
+  # add folders with the training results of the model you want to benchmark
+  model_path: ["./experiments/outputs/5fold_colontcn_fold_1/",
+              "./experiments/outputs/5fold_colontcn_fold_2/",
+              "./experiments/outputs/5fold_colontcn_fold_3/",
+              "./experiments/outputs/5fold_colontcn_fold_4/",
+              "./experiments/outputs/5fold_colontcn_fold_5/"]
+
+  # Model Architecture
+  model_type: "colontcn" # mstcn or tcn
+
+  ### Model Architecture
+  input_size: 2048 # input embedding dimension
+  list_of_features_sizes: [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64] # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  output_size: 9   # number of output classes of the model

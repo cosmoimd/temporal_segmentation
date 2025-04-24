@@ -1,0 +1,91 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Train a ColonTCN model in a 5-fold setting
+##### ##### ##### #####
+##### ##### ##### #####
+
+general:
+  # root directory where to save the results
+  output_folder: "./experiments/outputs/5fold_colontcn_fold_4"
+
+data_loader:
+  batch_size: 6 # train and valid batch size
+  num_workers: 6 # number of workers per data loader
+
+  temp_folder:  "./experiments/temp_dataset/5fold/train_valid_fold4/"
+  prepare_dataset: True # whether to construct the temp dast i/o dataset in the temp_folder from scratch
+
+  rc_csv: "./data/dataset/RC_dataset/video_info.csv"
+
+
+  train: [
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "video_list": "./data/dataset/RC_lists/5_fold/fold4_train.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 5 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_5x_aug",
+      "video_list": "./data/dataset/RC_lists/5_fold/fold4_train.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 1 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+  ]
+
+  valid: [
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "video_list": "./data/dataset/RC_lists/5_fold/fold4_valid.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 5 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+  ]
+
+
+  # temporal augmentation on the data 2/3 random frame sampling with p 1/subsampling_factor
+  # 1/3 randon start between (0,subsampling_factor) and sample then ::subsampling_factor
+  temporal_augmentation: True
+
+
+optimizer:
+  type: 'adamw' # type of optimizer. One of: ['sgd', 'adam', 'adamw', 'RMSprop']
+  scheduler_name: "linear"  # scheduler name in step["cosine", "linear", "step"]. Leave "" for no scheduler
+  start_lr: 0.0005 # Initial learning rate.
+  min_lr: 0.000001 # minimum learning rate (e.g., 5e-5)
+  decay_rate: 0.1 # LR decay rate, used in StepLRScheduler (e.g., 0.1)
+  warmup_epochs: 5 # number of epochs (int) to be considered as warmup (e.g., 20)
+  warmup_lr: 0.0000005  # learning rate used for warmup
+  weight_decay: 0.01 # weight decay (L2 penalty) for optimizer
+  decay_epochs: 10 # epoch interval to decay LR, used in StepLRSchedule (e.g., 30)
+  cycle_limit: 1 # number of times to repeat cosine in the scheduler
+
+  n_epochs: 2000 # number of training epochs
+  save_checkpoint_N_epochs: 50 # save a model checkpoint every save_checkpoint_N_epochs epochs
+  class_weights: "compute" # save a model checkpoint every save_checkpoint_N_epochs epochs
+
+  losses: ["CE", "TMSE"]
+
+  focal_weight: 5
+  ce_weight: 0.25
+
+  alpha: 2.0
+
+
+model:
+  # add a path if you wish to finetune the model
+  model_path: ""
+
+  # Model Architecture
+  model_type: "colontcn" # mstcn or tcn
+
+  ### Model Architecture
+  conv_type: "causal" # type of TCN: "acausal" (see past and future) or "casual" (see only the past)
+  input_size: 2048 # input embedding dimension
+  list_of_features_sizes: [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64] # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  output_size: 9   # number of output classes of the model

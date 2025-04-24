@@ -1,0 +1,84 @@
+##### ##### ##### #####
+##### ##### ##### #####
+#####
+##### ##### ##### #####
+##### ##### ##### #####
+
+general:
+  # root directory where to save the inference results
+  output_folder: "./experiments/outputs/4fold_shared_colontcn_result/"
+
+  folds_values: ['f1_fold_1', 'f1_fold_2', 'f1_fold_3', 'f1_fold_4']
+
+data_loader:
+  batch_size: 1 # train and valid batch size
+  num_workers: 1 # number of workers per data loader
+
+  rc_csv: "./data/dataset/RC_dataset/video_info.csv"
+
+  temp_folder_test:  ["./experiments/outputs/4fold_fold4_for_test/",
+                      "./experiments/outputs/4fold_fold3_for_test/",
+                      "./experiments/outputs/4fold_fold2_for_test/",
+                      "./experiments/outputs/4fold_fold1_for_test/"]
+  prepare_dataset: False # whether to construct the temp dast i/o dataset in the temp_folder from scratch
+
+  test: [
+    [
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "dataset_name": "4",
+      "video_list": "./data/dataset/RC_lists/4_fold/4.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 5 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+    ],
+    [
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "dataset_name": "3",
+      "video_list": "./data/dataset/RC_lists/4_fold/3.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 5 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+    ],
+    [
+      { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "dataset_name": "2",
+        "video_list": "./data/dataset/RC_lists/4_fold/2.txt",
+        "csv_path": "./data/dataset/RC_annotation/",
+        "subsampling_factor": 5 ,
+        "gt_name": "GT",
+        "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+    ],
+    [
+    { "pkl_path": "./data/dataset/RC_dataset_embeddings_1x",
+      "dataset_name": "1",
+      "video_list": "./data/dataset/RC_lists/4_fold/1.txt",
+      "csv_path": "./data/dataset/RC_annotation/",
+      "subsampling_factor": 5 ,
+      "gt_name": "GT",
+      "str_to_idx":  { "outside": 0, "insertion": 1, "ceacum": 2, "ileum": 3, "ascending": 4, "transverse": 5, "descending": 6, "sigmoid": 7, "rectum": 8, "n.a.": 999, "uncertain": 999 }  },
+    ],
+
+  ]
+
+model:
+  # add folders with the training results of the model you want to benchmark
+  model_path: ["./experiments/outputs/models/colontcn_4fold/fold1.pth",
+              "./experiments/outputs/models/colontcn_4fold/fold2.pth",
+              "./experiments/outputs/models/colontcn_4fold/fold3.pth",
+              "./experiments/outputs/models/colontcn_4fold/fold4.pth"]
+
+
+  # Model Architecture
+  model_type: "colontcn" # mstcn or tcn
+
+  ### Model Architecture
+  input_size: 2048 # input embedding dimension
+  list_of_features_sizes: [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64] # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  output_size: 9   # number of output classes of the model

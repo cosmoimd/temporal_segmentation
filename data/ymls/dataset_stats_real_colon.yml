@@ -1,0 +1,9 @@
+# where to save the results
+output_folder: "./experiments/visualisations"
+
+# time
+time_threshold: 120
+
+# dataset annotation and embeddings
+video_csv_path: "./data/dataset/RC_annotation/"
+pkl_files: "./dataset/RC_dataset_embeddings_1x/"

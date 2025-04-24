@@ -1,0 +1,36 @@
+# Classic stuff
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+.DS_Store
+
+# Remove this line if it causes `__init__.py` to be ignored
+__pycache__/
+*.pyc
+
+# Git and IDE-related files
+.git/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Virtual environment
+venv/
+.env/
+
+# Build-related files
+build/
+dist/
+*.egg-info/
+
+# Ignore everything in data/dataset except RC_lists/
+data/dataset/*
+!data/dataset/RC_lists/
+!data/dataset/RC_lists/**
+
+# Experiment output directories
+experiments/*

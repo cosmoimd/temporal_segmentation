@@ -1,0 +1,10 @@
+# where to save output dataset
+output_folder: "./dataset/RC_dataset_embeddings_5x/"
+# feature extraction output folder
+feature_extraction_folder: "./dataset/feature_extraction_5x_aug/"
+# number of augmentations run during feature extraction
+number_of_augmentations: 5
+# folder containing dataset video csvs
+video_csv_intermediate_path: "./dataset/RC_annotation/"
+# sampling factor which was used at feature extraction. enconding of one frame every?
+sampling_factor: 5

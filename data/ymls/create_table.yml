@@ -1,0 +1,12 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Create tables of models results
+##### ##### ##### #####
+##### ##### ##### #####
+
+input_csvs_from_testing: [""] # add paths of csv obtained form inference_testing_on_folds
+
+model_descriptions: [""] # add model names
+
+output_csv: "table_of_results_aggregated.csv"
+

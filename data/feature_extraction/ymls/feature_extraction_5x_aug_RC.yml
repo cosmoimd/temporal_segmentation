@@ -1,0 +1,26 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Applies data augmentation and feature extraction, encoding videos into their latent embedding space, at 5fps
+##### Usage:  CUDA_VISIBLE_DEVICES=0 python3 feature_extraction.py --config ymls/feature_extraction_5x_aug_RC.yml
+##### ##### ##### #####
+##### ##### ##### #####
+
+general:
+  # root directory where to save the results
+  output_folder: "../dataset/feature_extraction_5x_aug"
+
+  n_of_augmentations: 5 # number of times to repeat the encoding loop with augmentation
+
+data_loader:
+  batch_size: 1024
+  num_workers: 16
+  augmentation: True # perform data augmentation on videos
+  subsampling: 5
+
+  # dataset to be encoded, metadata path
+  annotation_csv_path: "../dataset/RC_annotation"
+  dataset_path: "../dataset/RC_dataset"
+
+### Encoder from ResNet50 pretrained on ImageNet
+model:
+  encoder: "resnet50"

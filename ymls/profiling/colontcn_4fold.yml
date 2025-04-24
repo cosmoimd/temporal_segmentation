@@ -1,0 +1,24 @@
+##### ##### ##### #####
+##### ##### ##### #####
+##### Profile the best ColonTCN model trained on the 4-fold benchmark
+##### ##### ##### #####
+##### ##### ##### #####
+
+model:
+  # add a path if you wish to finetune the model
+  model_path: "./experiments/outputs/models/colontcn_4fold/fold1.pth"
+
+  # Model Architecture
+  model_type: "colontcn" # mstcn or tcn
+
+  ### Model Architecture
+  conv_type: "causal" # type of TCN: "acausal" (see past and future) or "casual" (see only the past)
+  input_size: 2048 # input embedding dimension
+  list_of_features_sizes: [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64] # features sizes in each temporal block
+  kernel_size: 7 # size of the 1D kernel at every layer in every block
+  dropout: 0.5 # amount of dropout applied after each 1D conv layer in every block
+  num_of_convs: 2 # number of temporal convolutions in each temporal block
+  residual: True # whether to apply residual connections in the temporal blocks
+  last_layer: "conv" # last layer that makes frames class predictions, either "linear" (FC) or "conv" (1D conv)
+  output_size: 9   # number of output classes of the model
+
